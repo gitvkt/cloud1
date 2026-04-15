@@ -1,19 +1,31 @@
 CREATE TABLE CLIENTES (
-
     id_cliente INT AUTO_INCREMENT PRIMARY KEY,
-    status_cliente ENUM ("Ativo", "Inativo", "Bloqueado", "Banido"),
+    status_cliente ENUM("Ativo", "Inativo", "Bloqueado", "Banido") DEFAULT "Ativo",
     
-	-- Identificação
+    -- Identificação Pessoal
     nome VARCHAR(120) NOT NULL,
-    apelido VARCHAR(20) NOT NULL UNIQUE,
-    senha VARCHAR(255) NOT NULL,
     cpf VARCHAR(14) NOT NULL UNIQUE,
     rg VARCHAR(12) NOT NULL UNIQUE,
+    data_nascimento DATE NOT NULL,
+    sexo VARCHAR(9) NULL,
+	data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     
-    -- Contato
+ 
+);
+	-- Contato
+    CREATE TABLE CLIENTE_CONTATO (
+    id_contato INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    id_cliente_fk INT NOT NULL, -- O nome padrão para facilitar a leitura
     celular VARCHAR(15) NOT NULL,
-    whatsapp VARCHAR(16) NULL,
+    whatsapp VARCHAR(16) NOT NULL, -- Alterado para NOT NULL conforme sua decisão
     email VARCHAR(200) NOT NULL UNIQUE,
+    
+    -- Ligação oficial com a tabela CLIENTES
+    CONSTRAINT fk_contato_cliente 
+    FOREIGN KEY (id_cliente_fk) 
+    REFERENCES CLIENTES(id_cliente) 
+    ON DELETE CASCADE
+);
     
     -- Endereço
     rua VARCHAR(150) NULL,
@@ -25,10 +37,9 @@ CREATE TABLE CLIENTES (
     
     
     -- Dados complementares
-    data_nascimento DATE NOT NULL,
+    
     sexo VARCHAR(9) NULL,
     altura DECIMAL(3,2) NULL,
     peso DECIMAL(6,3) NULL,
-    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     observacoes TEXT
     );
