@@ -17,36 +17,3 @@ CREATE TABLE CLIENTES (
     data_nascimento DATE NOT NULL,
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-----------------------------------------------------------------
-	-- Contato
-    CREATE TABLE CLIENTE_CONTATO (
-    id_contato INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    id_cliente_fk INT NOT NULL, -- O nome padrão para facilitar a leitura
-    celular VARCHAR(15) NOT NULL,
-    whatsapp VARCHAR(16) NOT NULL, -- Alterado para NOT NULL conforme sua decisão
-    email VARCHAR(200) NOT NULL UNIQUE,
-    
-    -- Ligação oficial com a tabela CLIENTES
-    CONSTRAINT fk_contato_cliente 
-    FOREIGN KEY (id_cliente_fk) 
-    REFERENCES CLIENTES(id_cliente) 
-    ON DELETE CASCADE
-);
-    
-    -- Endereço
-    rua VARCHAR(150) NULL,
-    numero VARCHAR(10) NULL,
-    complemento VARCHAR(120) NULL,
-    cidade VARCHAR(120) NULL,
-    estado CHAR(2) NULL,
-    cep VARCHAR(9) NULL,
-    
-    
-    -- Dados complementares
-    
-    sexo VARCHAR(9) NULL,
-    altura DECIMAL(3,2) NULL,
-    peso DECIMAL(6,3) NULL,
-    observacoes TEXT
-    );
