@@ -1,17 +1,23 @@
 CREATE TABLE CLIENTES (
-    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    -- Chave Primária e Status
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     status_cliente ENUM("Ativo", "Inativo", "Bloqueado", "Banido") DEFAULT "Ativo",
     
-    -- Identificação Pessoal
+    -- Identificação Pessoal e Login
     nome VARCHAR(120) NOT NULL,
+    apelido VARCHAR(20) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL, -- Espaço para Hash (Segurança)
+    
+    -- Documentação (Constraints de Unicidade)
     cpf VARCHAR(14) NOT NULL UNIQUE,
     rg VARCHAR(12) NOT NULL UNIQUE,
-    data_nascimento DATE NOT NULL,
-    sexo VARCHAR(9) NULL,
-	data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     
- 
+    -- Datas de Controle
+    data_nascimento DATE NOT NULL,
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+----------------------------------------------------------------
 	-- Contato
     CREATE TABLE CLIENTE_CONTATO (
     id_contato INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
