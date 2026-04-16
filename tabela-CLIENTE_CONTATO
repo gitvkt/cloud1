@@ -1,13 +1,13 @@
 CREATE TABLE CLIENTE_CONTATO (
-	-- Dado Identificado único da tabela. Relação (1:N)
-    id_cliente_contato INT AUTO_INCREMENT PRIMARY KEY,
-    id_cliente_contato_fk INT NOT NULL,
+	-- Dado Identificador único da tabela. Relação (1:N)
+    id_cliente_contato INT AUTO_INCREMENT PRIMARY KEY, -- Identificação da coluna
+    id_cliente_contato_fk INT NOT NULL, -- Chave estrangeira da coluna
     
     
     -- Dados de Contato
-    celular VARCHAR(15) NOT NULL UNIQUE,
-    whatsapp_contato VARCHAR(18) NOT NULL UNIQUE,
-    telegram VARCHAR(18) NULL,
+    celular VARCHAR(15) NOT NULL UNIQUE, -- Celular do CLIENTE
+    whatsapp_contato VARCHAR(18) NOT NULL UNIQUE, -- Whatsapp do CLIENTE
+    telegram VARCHAR(18) NULL, -- Telegram do CLIENTE
     
     -- Regra de chave estrangeira
     CONSTRAINT regra_cliente_contato -- Regra para chave estrangeira. Deve ter nome (boa prática)
