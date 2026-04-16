@@ -1,7 +1,7 @@
 CREATE TABLE CLIENTE_CONTATO (
 	-- Dado Identificado único da tabela. Relação (1:N)
     id_cliente_contato INT AUTO_INCREMENT PRIMARY KEY,
-    id_cliente_fk INT NOT NULL,
+    id_cliente_contato_fk INT NOT NULL,
     
     
     -- Dados de Contato
@@ -11,7 +11,7 @@ CREATE TABLE CLIENTE_CONTATO (
     
     -- Regra de chave estrangeira
     CONSTRAINT regra_cliente_contato -- Regra para chave estrangeira. Deve ter nome (boa prática)
-    FOREIGN KEY (id_cliente_fk) -- Nome da chave estrangeira criada acima
+    FOREIGN KEY (id_cliente_contato_fk) -- Nome da chave estrangeira criada acima
     REFERENCES CLIENTE(id_cliente) -- Nome da tabela PAI e sua coluna, da qual, será apontada e referenciada 
     ON DELETE CASCADE  -- Comando que garante que se o cliente for deletado, o contato também seja. (evita dados órfãos.)
 );
