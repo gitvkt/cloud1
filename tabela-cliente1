@@ -1,7 +1,7 @@
-CREATE TABLE CLIENTES (
+CREATE TABLE CLIENTE (
     -- Chave Primária e Status
     id_cliente INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    status_cliente ENUM("Ativo", "Inativo", "Bloqueado", "Banido") DEFAULT "Ativo",
+    status_cliente ENUM("Ativo", "Inativo", "Bloqueado", "Banido", "Inadimplente") DEFAULT "Ativo",
     
     -- Identificação Pessoal e Login
     nome VARCHAR(120) NOT NULL,
