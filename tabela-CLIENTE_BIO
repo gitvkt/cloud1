@@ -1,7 +1,7 @@
-CREATE TABLE BIO_CLIENTE (
+CREATE TABLE CLIENTE_BIO (
     -- Identificação da TABELA 
-	id_bio_cliente INT AUTO_INCREMENT PRIMARY KEY,
-    id_bio_cliente_fk INT NOT NULL UNIQUE,
+	id_cliente_bio INT AUTO_INCREMENT PRIMARY KEY,
+    id_cliente_bio_fk INT NOT NULL UNIQUE,
     
     -- Dados que serão coletados para a BIO do cliente
     sexo ENUM("Masculino", "Feminino", "Outros") NULL,
@@ -9,8 +9,8 @@ CREATE TABLE BIO_CLIENTE (
     peso DECIMAL(6,3) NULL,
     observacoes TEXT NULL,
     
-    CONSTRAINT fk_id_bio_cliente -- Nome da regra da chave estrangeira
-    FOREIGN KEY (id_bio_cliente_fk) -- Nome da chave estrangeira que irá refenciar
+    CONSTRAINT fk_id_cliente_bio -- Nome da regra da chave estrangeira
+    FOREIGN KEY (id_cliente_bio_fk) -- Nome da chave estrangeira que irá refenciar
     REFERENCES CLIENTE(id_cliente) -- Nome da chave estrangeira referenciada da tabela CLIENTE na coluna PK id_cliente 
     ON DELETE CASCADE -- Regra que garante que seja deletada junto ao cadastro do CLIENTE, evitando lixo no BD
 );
