@@ -1,9 +1,1 @@
 ----------------------------------------------------------------
-    
-    -- Dados complementares
-    
-    sexo VARCHAR(9) NULL,
-    altura DECIMAL(3,2) NULL,
-    peso DECIMAL(6,3) NULL,
-    observacoes TEXT
-    );
