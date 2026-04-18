@@ -1,0 +1,19 @@
+CREATE TABLE CLIENTE_ENDERECO(
+	-- Dado identificador único da tabela. Relação (1:N)
+    id_cliente_endereco INT AUTO_INCREMENT PRIMARY KEY, -- Identificação da coluna
+    id_cliente_endereco_fk INT NOT NULL, -- Chave estrangeira da Coluna
+    
+    -- Dados de endereço do cliente
+    cep VARCHAR(9),
+    rua VARCHAR(150) NOT NULL, 
+    numero VARCHAR(120) NOT NULL,
+    bairro VARCHAR(150) NOT NULL,
+    cidade VARCHAR(150) NOT NULL,
+    estado CHAR(2),
+    pais VARCHAR(60),
+    
+    CONSTRAINT fk_id_cliente_endereco -- Regra da ligação da chave com a PK da tabela CLIENTE
+    FOREIGN KEY (id_cliente_endereco_fk) -- Identificador da chave estrangeira que será o elo da PK desta tabela com a PK da tabela CLIENTE.
+    REFERENCES CLIENTE(id_cliente) -- Identicação da tabela e coluna que foi apontada
+    ON DELETE CASCADE -- regra para garantir que seja deletada junto com o CLIENTE, evitando dados órfão (lixo)
+);
