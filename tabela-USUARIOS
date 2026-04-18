@@ -1,0 +1,76 @@
+CREATE TABLE USUARIO (
+	-- Chave Primária e Status do Usuario
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    status_usuario ENUM("Ativo","Inativo","Bloqueado") DEFAULT "Ativo",
+    
+    -- Identificação Pessoal
+    nome VARCHAR(100) NOT NULL,
+    apelido VARCHAR(60) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL,
+    senha_usuario VARCHAR(255) NOT NULL,
+    
+    -- Documentação
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    rg VARCHAR(20) NULL UNIQUE,
+    
+	-- Datas de Controle
+    data_nascimento DATE NOT NULL,
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE USUARIO_BIO (
+    -- Identificação da TABELA 
+	id_usuario_bio INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario_bio_fk INT NOT NULL UNIQUE,
+    
+    -- Dados que serão coletados para a BIO do usuario
+    sexo ENUM("Masculino", "Feminino", "Outros") NULL,
+    altura DECIMAL(3,2) NULL,
+    peso DECIMAL(6,3) NULL,
+    observacoes TEXT NULL,
+    
+    CONSTRAINT fk_id_usuario_bio -- Nome da regra da chave estrangeira
+    FOREIGN KEY (id_usuario_bio_fk) -- Nome da chave estrangeira que irá refenciar
+    REFERENCES USUARIO(id_usuario) -- Nome da chave estrangeira referenciada da tabela USUARIO na coluna PK id_usuario 
+    ON DELETE CASCADE -- Regra que garante que seja deletada junto ao cadastro do USUARIO, evitando lixo no BD
+);
+
+CREATE TABLE USUARIO_CONTATO (
+	-- Dado Identificador único da tabela. Relação (1:N)
+    id_usuario_contato INT AUTO_INCREMENT PRIMARY KEY, -- Identificação da coluna
+    id_usuario_contato_fk INT NOT NULL, -- Chave estrangeira da coluna
+    
+    
+    -- Dados de Contato
+    celular VARCHAR(15) NOT NULL UNIQUE, -- Celular do USUARIO
+    whatsapp_contato VARCHAR(18) NOT NULL UNIQUE, -- Whatsapp do USUARIO
+    telegram VARCHAR(18) NULL, -- Telegram do USUARIO
+    
+    -- Regra de chave estrangeira
+    CONSTRAINT regra_usuario_contato -- Regra para chave estrangeira. Deve ter nome (boa prática)
+    FOREIGN KEY (id_usuario_contato_fk) -- Nome da chave estrangeira criada acima
+    REFERENCES USUARIO(id_usuario) -- Nome da tabela PAI e sua coluna, da qual, será apontada e referenciada 
+    ON DELETE CASCADE  -- Comando que garante que se o usuario for deletado, o contato também seja. (evita dados órfãos.)
+);
+
+CREATE TABLE USUARIO_ENDERECO(
+	-- Dado identificador único da tabela. Relação (1:N)
+    id_usuario_endereco INT AUTO_INCREMENT PRIMARY KEY, -- Identificação da coluna
+    id_usuario_endereco_fk INT NOT NULL, -- Chave estrangeira da Coluna
+    
+    -- Dados de endereço do usuario
+    cep VARCHAR(9)NOT NULL,
+    rua VARCHAR(150) NOT NULL,
+    numero VARCHAR(120) NOT NULL,
+    complemento VARCHAR(120) NULL,
+    bairro VARCHAR(150) NOT NULL,
+    cidade VARCHAR(150) NOT NULL,
+    estado CHAR(2) NOT NULL,
+    pais VARCHAR(60) NOT NULL,
+    
+    CONSTRAINT fk_id_usuario_endereco -- Regra da ligação da chave com a PK da tabela USUARIO
+    FOREIGN KEY (id_usuario_endereco_fk) -- Identificador da chave estrangeira que será o elo da PK desta tabela com a PK da tabela USUARIO.
+    REFERENCES USUARIO(id_usuario) -- Identicação da tabela e coluna que foi apontada
+    ON DELETE CASCADE -- regra para ser apagada junto ao usuario que for apagando da qual foi referenciado
+);
