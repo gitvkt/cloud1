@@ -26,6 +26,12 @@ CREATE TABLE USUARIO (
 );
 
 ----------------------------------------------------------------
+Tipo de Dado,Nome do Campo
+Identificador Físico,					id_usuario_pk
+Identificador Lógico (API/Mobile),		uuid_usuario
+Credencial de Segurança,				senha_usuario_hash
+Identificador de Empresa (Tenant),		id_organizacao_fk
+----------------------------------------------------------------
 -- Redes Sociais
 	website VARCHAR(255) NULL,
 	instagram VARCHAR(255) NULL,
