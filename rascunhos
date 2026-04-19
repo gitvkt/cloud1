@@ -1,1 +1,34 @@
+CREATE TABLE USUARIO (
+    -- PK Técnica (Interna do Banco)
+    id_usuario_pk INT AUTO_INCREMENT PRIMARY KEY, 
+    
+    -- PK Lógica (Usada nas APIs Node, Java, Mobile, Python)
+    uuid CHAR(36) NOT NULL UNIQUE, 
+    
+    -- Controle de Multi-empresa (Para o ERP/CRM)
+    id_organizacao_fk INT NOT NULL, 
+
+    -- Credenciais de Acesso Multi-Plataforma
+    apelido VARCHAR(25) NOT NULL UNIQUE, -- Para usar nickname rápido quando necessário.
+    email VARCHAR(255) NOT NULL UNIQUE,  -- Email de autenticação
+    celular_auth VARCHAR(15) NOT NULL UNIQUE,  -- Login via SMS/OTP
+    whatsapp_auth VARCHAR(15) NOT NULL UNIQUE, -- Notificações e Vendas
+    senha_hash VARCHAR(255) NOT NULL,
+    
+    -- Status e Nível (RBAC - Role Based Access Control)
+    status_usuario ENUM('Ativo', 'Inativo', 'Bloqueado', 'Pendente') DEFAULT 'Pendente',
+    nivel_acesso ENUM('Admin', 'Gerente', 'Operador', 'Suporte') DEFAULT 'Operador',
+
+    -- Auditoria (Padrão Mundial)
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    data_exclusao TIMESTAMP NULL DEFAULT NULL -- Soft Delete
+);
+
 ----------------------------------------------------------------
+-- Redes Sociais
+	website VARCHAR(255) NULL,
+	instagram VARCHAR(255) NULL,
+	linkedin VARCHAR(255) NULL,
+	github VARCHAR(255) NULL,
+
