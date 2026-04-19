@@ -2,7 +2,11 @@ CREATE TABLE CLIENTE_BIO (
     -- Identificação da TABELA 
 	id_cliente_bio INT AUTO_INCREMENT PRIMARY KEY,
     id_cliente_bio_fk INT NOT NULL UNIQUE,
-    
+
+	-- Documentação
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    rg VARCHAR(20) NULL UNIQUE,
+
     -- Dados que serão coletados para a BIO do cliente
     sexo ENUM("Masculino", "Feminino", "Outros") NULL,
     altura DECIMAL(3,2) NULL,
