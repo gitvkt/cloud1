@@ -8,7 +8,7 @@ Tabela ORGANIZACAO - concentração de daos empresariais do operador
 (Pai 1:1)
 
 -------------------------------------------------------------------------------------------
-Tabela Chave Estrangeira (FK)RelaçãoObjetivo Técnico
+Tabela Chave Estrangeira (FOREIGN KEY - FK) -Relação Objetivo Técnico
 
 USUARIO - (Pai 1:) Centralizar status e autenticação.
 
