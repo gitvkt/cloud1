@@ -4,12 +4,12 @@ Primeiro Projeto da Faculdade
 Resumo da Estrutura Consolidada:
 -------------------------------------------------------------------------------------------
 Tabela ORGANIZACAO - concentração de daos empresariais do operador
-
+(Pai 1:1)
 -------------------------------------------------------------------------------------------
 
 Tabela Chave Estrangeira (FK)RelaçãoObjetivo Técnico
 
-USUARIO - Centralizar status e autenticação.
+USUARIO - (Pai 1:) Centralizar status e autenticação.
 
 USUARIO_BIO - id_usuario_bio_fk - 1:1 - Perfil biométrico único e Social.
 
@@ -20,7 +20,7 @@ USUARIO_ENDERECO - id_cliente_endereco_fk - 1:N - Armazenar localizações do us
 -------------------------------------------------------------------------------------------
 Tabela Chave Estrangeira (FK)RelaçãoObjetivo Técnico
 
-CLIENTE - Pai - Centralizar status e autenticação.
+CLIENTE - (Pai 1:) Centralizar status e autenticação.
 
 CLIENTE_BIO - id_cliente_bio_fk - 1:1 - Perfil biométrico único (Peso/Altura).
 
