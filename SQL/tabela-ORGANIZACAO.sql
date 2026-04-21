@@ -15,7 +15,7 @@ CREATE TABLE ORGANIZACAO (
     data_atualizacao_organizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     -- Regra nomeada com chave estrangeira apontada para tabela USUARIO e seu respectivo id
-    CONSTRAINT fk_organizacao_usuario
+    CONSTRAINT fk_id_organizacao
     FOREIGN KEY (id_organizacao_fk)
     REFERENCES USUARIO(id_usuario_pk)
     ON DELETE RESTRICT
