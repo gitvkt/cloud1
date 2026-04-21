@@ -3,7 +3,7 @@ CREATE TABLE ORGANIZACAO (
     uuid_organizacao CHAR(36) DEFAULT (UUID()) NOT NULL UNIQUE, -- UUID automático
     
     -- Chave Estrangeira
-    id_usuario_fk INT NOT NULL,
+    id_organizacao_fk INT NOT NULL,
 
     cnpj_organizacao VARCHAR(20) NOT NULL UNIQUE,
     nome_fantasia_organizacao VARCHAR(100) NOT NULL,
