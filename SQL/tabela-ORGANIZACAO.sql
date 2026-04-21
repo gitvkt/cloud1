@@ -16,7 +16,7 @@ CREATE TABLE ORGANIZACAO (
 
     -- Regra nomeada com chave estrangeira apontada para tabela USUARIO e seu respectivo id
     CONSTRAINT fk_organizacao_usuario
-    FOREIGN KEY (id_usuario_fk)
+    FOREIGN KEY (id_organizacao_fk)
     REFERENCES USUARIO(id_usuario_pk)
     ON DELETE RESTRICT
 );
