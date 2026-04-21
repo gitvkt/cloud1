@@ -2,8 +2,22 @@
 Primeiro Projeto da Faculdade
 
 Resumo da Estrutura Consolidada:
+-------------------------------------------------------------------------------------------
+Tabela 
+-------------------------------------------------------------------------------------------
 
-TabelaChave Estrangeira (FK)RelaçãoObjetivo Técnico
+Tabela Chave Estrangeira (FK)RelaçãoObjetivo Técnico
+
+USUARIO - Centralizar status e autenticação.
+
+USUARIO_BIO - id_usuario_bio_fk - 1:1 - Perfil biométrico único e Social.
+
+USUARIO_CONTATO - id_cliente_usuario_fk - 1:N - Gerenciar múltiplos meios de comunicação.
+
+USUARIO_ENDERECO - id_cliente_endereco_fk - 1:N - Armazenar localizações do usuário e operadores.
+
+-------------------------------------------------------------------------------------------
+Tabela Chave Estrangeira (FK)RelaçãoObjetivo Técnico
 
 CLIENTE - Pai - Centralizar status e autenticação.
 
