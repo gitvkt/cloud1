@@ -3,7 +3,8 @@ Primeiro Projeto da Faculdade
 
 Resumo da Estrutura Consolidada:
 -------------------------------------------------------------------------------------------
-Tabela 
+Tabela ORGANIZACAO - concentração de daos empresariais do operador
+
 -------------------------------------------------------------------------------------------
 
 Tabela Chave Estrangeira (FK)RelaçãoObjetivo Técnico
