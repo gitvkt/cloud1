@@ -7,17 +7,14 @@ CREATE TABLE USUARIO (
 	mail_user VARCHAR(120) NOT NULL UNIQUE,
 	pass_user_hash VARCHAR(255) NOT NULL,
 
--- Identificador de status e nível de acesso do usuário
+    -- Identificador de status e nível de acesso do usuário
     status_user ENUM ("Ativo", "Inativo", "Bloqueado", "Pendente", "Banido") DEFAULT "Ativo",
-    perm_user ENUM ("Admin", "Gerente", "Suporte1", "Suporte2", "Operador") DEFAULT "Operador", 
+    permissao_user ENUM ("Admin", "Gerente", "Suporte1", "Suporte2", "Operador") DEFAULT "Operador", 
 
- -- Dados de contato direto e autenticação de 2 fatores (futuro)
+    -- Dados de contato direto e autenticação de 2 fatores (futuro)
 	celular_auth VARCHAR(18) NOT NULL,
 	whatsapp_auth VARCHAR(18) NULL,
-
-	
-	
-   
+  
     -- Registra aniversario do cliente e eventos para Log
     dnasce_user DATE NOT NULL,
     dregister_user TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
