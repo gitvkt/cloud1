@@ -1,5 +1,6 @@
 CREATE TABLE USUARIO (
     id_usuario_pk INT AUTO_INCREMENT PRIMARY KEY, -- Identificador da chave Primária
+    uuid_usuario CHAR(36) DEFAULT (UUID()) NOT NULL UNIQUE, -- UUID automático interno
     
     -- Dados de login do usuário
 	apelido_usuario VARCHAR(25) NOT NULL UNIQUE,
@@ -15,7 +16,7 @@ CREATE TABLE USUARIO (
 	whatsapp_auth VARCHAR(18) NULL,
 
 	
-	uuid_usuario CHAR(36) DEFAULT (UUID()) NOT NULL UNIQUE, -- UUID automático interno
+	
    
     -- Registra aniversario do cliente e eventos para Log
     data_nascimento_usuario DATE NOT NULL,
