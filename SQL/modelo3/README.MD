@@ -1,54 +1,35 @@
-                +------------------+
-                |     USUARIO      |
-                |------------------|
-                | id_usuario_pk    |
-                | apelido_usuario  |
-                | email_usuario    |
-                | nivel_acesso     |
-                +------------------+
-                        |
-                        | 1:1
-                        |
-                +------------------+
-                |  USUARIO_BIO     |
-                |------------------|
-                | id_usuario_bio   |
-                | id_usuario_fk    |
-                | foto_perfil      |
-                | genero           |
-                +------------------+
+                ┌───────────────┐
+                │   USUARIO     │
+                │ id_usuario_pk │
+                └───────┬───────┘
+                        │ 1:1
+                        │
+                ┌───────────────┐
+                │ USUARIO_BIO   │
+                │ id_usuario_fk │
+                └───────────────┘
 
-   << Universo Interno - Equipe >>
 
-------------------------------------------------------------
+                ┌───────────────┐
+                │   CLIENTE     │
+                │ id_cliente_pk │
+                └───────┬───────┘
+                        │ 1:1
+                        │
+                ┌───────────────┐
+                │ CLIENTE_BIO   │
+                │ id_cliente_fk │
+                └───────────────┘
 
-   << Universo Externo - Clientes >>
 
-                +------------------+
-                |     CLIENTE      |
-                |------------------|
-                | id_cliente_pk    |
-                | apelido_cliente  |
-                | email_cliente    |
-                | nivel_acesso     |
-                +------------------+
-                        |
-                        | N:N
-                        |
-                +----------------------+
-                | CLIENTE_ORGANIZACAO  |
-                |----------------------|
-                | id_cliente_fk        |
-                | id_organizacao_fk    |
-                +----------------------+
-                        |
-                        | N:1
-                        |
-                +------------------+
-                |   ORGANIZACAO    |
-                |------------------|
-                | id_organizacao   |
-                | cnpj             |
-                | razao_social     |
-                | nome_fantasia    |
-                +------------------+
+                ┌───────────────┐
+                │ ORGANIZACAO   │
+                │ id_organizacao│
+                └───────┬───────┘
+                        │ N:N
+                        │
+                ┌───────────────┐
+                │CLIENTE_ORGANIZ│
+                │ id_cliente_fk │───► CLIENTE
+                │ id_org_fk     │───► ORGANIZACAO
+                └───────────────┘
