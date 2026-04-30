@@ -1,8 +1,10 @@
 <?php
+// Conexão com o banco de dados
 $host = "localhost";
-$user = "vktcloud_aula1";
-$pass = "#Bul0va88";
-$db   = "vktcloud_aula1";
+$user = "usuariobd";
+$pass = "senhabd";
+$db   = "bd";
+
 
 $conn = new mysqli($host, $user, $pass, $db);
 if ($conn->connect_error) {
