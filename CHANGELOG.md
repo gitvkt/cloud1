@@ -1,4 +1,4 @@
-# 📌 Changelog
+# 📌 Changelog Técnico
 
 ## 🗄️ Banco de Dados
 - Estrutura criada em **MySQL** com tabelas para usuários, clientes e organizações.
@@ -12,7 +12,6 @@
 - Inclusão de tabelas auxiliares:
   - `USUARIO_BIO` para informações adicionais (altura, peso, gênero, observações).
   - `USUARIO_CONTATO` para endereços e contatos secundários.
-- Primeira versão funcional do cadastro de usuários.
 
 ---
 
@@ -35,17 +34,27 @@
 
 ---
 
-## [v1.3.0] - Melhorias e automações
-- Reposicionamento do **CEP** acima dos campos de endereço no formulário.
-- Implementação da **formatação automática do CEP** (`00000-000`).
-- Integração com **ViaCEP** para preenchimento automático de endereço.
-- Ajuste no **email padrão** → `"sememail@vktcloud.com.br"` quando não houver email disponível.
-- Inclusão de **botões de consulta**:
-  - **Inscrição Estadual (SINTEGRA RJ)** → link gerado automaticamente com o CNPJ digitado.
-  - **Código SUFRAMA** → link direto para o portal oficial.
-- Remoção do campo **Inscrição Municipal** do formulário e do PHP.
-- Ajuste no **INSERT SQL** e `bind_param` para refletir apenas os campos ativos.
-- Melhoria nas mensagens de alerta quando dados não são encontrados.
-- Estrutura final consolidada em **três partes (PHP, HTML, JS)**, pronta para rodar sem warnings.
+## [v1.3.0] - Refinamento da base de dados
+- **UUID automático**: `CHAR(36) DEFAULT (UUID()) NOT NULL UNIQUE` em todas as tabelas principais.
+- **Campos de login**: apelido e email agora `NOT NULL UNIQUE`.
+- **Senha**: ampliada para `VARCHAR(255)` para suportar algoritmos modernos de hash.
+- **Enums**: ampliados com novos valores (`Bloqueado`, `Pendente`, `Banido`, `Suporte1..3`, `Operador`, `Administrador`).
+- **BIO**:
+  - Foto de perfil com default (`avatar_usuario.png` / `avatar_cliente.png`).
+  - Gênero com opção `'Não Informado'`.
+  - Observações agora `TEXT`.
+  - `ON DELETE CASCADE` para integridade referencial.
+- **CONTATO**:
+  - Complemento ampliado para `VARCHAR(100)`.
+  - Campos de endereço expandidos para até 150 caracteres.
+  - `ON DELETE CASCADE` para exclusão automática junto ao usuário/cliente.
+- **ORGANIZACAO**:
+  - CNPJ `NOT NULL UNIQUE`.
+  - Atividades secundárias agora `TEXT`.
+  - Inscrição municipal mantida como opcional.
+  - Defaults em status (`Ativa`) e plano (`Nivel1`).
+- **CLIENTE_ORGANIZACAO**:
+  - `ON DELETE RESTRICT` para proteger vínculos.
+  - `UNIQUE (id_cliente_fk, id_organizacao_fk)` para evitar duplicidade de associação.
 
 ---
