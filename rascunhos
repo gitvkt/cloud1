@@ -1,40 +1,137 @@
+-- Tabela USUARIO
 CREATE TABLE USUARIO (
-    -- PK Técnica (Interna do Banco)
-    id_usuario_pk INT AUTO_INCREMENT PRIMARY KEY, 
-    
-    -- PK Lógica (Usada nas APIs Node, Java, Mobile, Python)
-    uuid CHAR(36) NOT NULL UNIQUE, 
-    
-    -- Controle de Multi-empresa (Para o ERP/CRM)
-    id_organizacao_fk INT NOT NULL, 
-
-    -- Credenciais de Acesso Multi-Plataforma
-    apelido VARCHAR(25) NOT NULL UNIQUE, -- Para usar nickname rápido quando necessário.
-    email VARCHAR(255) NOT NULL UNIQUE,  -- Email de autenticação
-    celular_auth VARCHAR(15) NOT NULL UNIQUE,  -- Login via SMS/OTP
-    whatsapp_auth VARCHAR(15) NOT NULL UNIQUE, -- Notificações e Vendas
-    senha_hash VARCHAR(255) NOT NULL,
-    
-    -- Status e Nível (RBAC - Role Based Access Control)
-    status_usuario ENUM('Ativo', 'Inativo', 'Bloqueado', 'Pendente') DEFAULT 'Pendente',
-    nivel_acesso ENUM('Admin', 'Gerente', 'Operador', 'Suporte') DEFAULT 'Operador',
-
-    -- Auditoria (Padrão Mundial)
-    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    data_exclusao TIMESTAMP NULL DEFAULT NULL -- Soft Delete
+  id_usuario_pk INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  uuid_usuario CHAR(30) NOT NULL,
+  apelido_usuario VARCHAR(50),
+  email_usuario VARCHAR(120),
+  senha_usuario_hash VARCHAR(120),
+  status_usuario ENUM('Ativo','Inativo','Suspenso'),
+  nivel_acesso_usuario ENUM('Admin','Gestor','Usuario'),
+  celular_auth VARCHAR(18) NOT NULL,
+  whatsapp_auth VARCHAR(18) NOT NULL,
+  data_nascimento_usuario DATE NOT NULL,
+  data_cadastro_usuario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  data_atualizacao_usuario TIMESTAMP NULL,
+  data_exclusao_usuario TIMESTAMP NULL
 );
 
-----------------------------------------------------------------
-Tipo de Dado,Nome do Campo
-Identificador Físico,					id_usuario_pk
-Identificador Lógico (API/Mobile),		uuid_usuario
-Credencial de Segurança,				senha_usuario_hash
-Identificador de Empresa (Tenant),		id_organizacao_fk
-----------------------------------------------------------------
--- Redes Sociais
-	website VARCHAR(255) NULL,
-	instagram VARCHAR(255) NULL,
-	linkedin VARCHAR(255) NULL,
-	github VARCHAR(255) NULL,
+-- Tabela USUARIO_BIO
+CREATE TABLE USUARIO_BIO (
+  id_usuario_bio_pk INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id_usuario_fk INT NOT NULL,
+  foto_perfil_usuario VARCHAR(50),
+  genero_usuario ENUM('Masculino','Feminino','Outro'),
+  altura_usuario DECIMAL(6,2),
+  peso_usuario DECIMAL(6,3),
+  observacoes_usuario VARCHAR(150),
+  data_atualizacao_bio TIMESTAMP NULL,
+  FOREIGN KEY (id_usuario_fk) REFERENCES USUARIO(id_usuario_pk)
+);
 
+-- Tabela USUARIO_CONTATO
+CREATE TABLE USUARIO_CONTATO (
+  id_usuario_contato_pk INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id_usuario_fk INT NOT NULL,
+  tipo_contato ENUM('Residencial','Comercial','Outro'),
+  cep_usuario CHAR(9),
+  logradouro_usuario VARCHAR(150),
+  numero_usuario VARCHAR(10),
+  complemento_usuario VARCHAR(50),
+  bairro_usuario VARCHAR(50),
+  cidade_usuario VARCHAR(50),
+  estado_usuario CHAR(2),
+  telefone_fixo_usuario VARCHAR(15),
+  email_secundario_usuario VARCHAR(120),
+  data_cadastro_contato TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  data_atualizacao_contato TIMESTAMP NULL,
+  FOREIGN KEY (id_usuario_fk) REFERENCES USUARIO(id_usuario_pk)
+);
+
+-- Tabela CLIENTE
+CREATE TABLE CLIENTE (
+  id_cliente_pk INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  uuid_cliente CHAR(30) NOT NULL,
+  apelido_cliente VARCHAR(50),
+  email_cliente VARCHAR(120),
+  senha_cliente_hash VARCHAR(120),
+  status_cliente ENUM('Ativo','Inativo','Suspenso'),
+  nivel_acesso_cliente ENUM('Master','Nivel1','Nivel2','Nivel3'),
+  celular_auth VARCHAR(18) NOT NULL,
+  whatsapp_auth VARCHAR(18) NOT NULL,
+  data_nascimento_cliente DATE NOT NULL,
+  data_cadastro_cliente TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  data_atualizacao_cliente TIMESTAMP NULL,
+  data_exclusao_cliente TIMESTAMP NULL
+);
+
+-- Tabela CLIENTE_BIO
+CREATE TABLE CLIENTE_BIO (
+  id_cliente_bio_pk INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id_cliente_fk INT NOT NULL,
+  foto_perfil_cliente VARCHAR(50),
+  genero_cliente ENUM('Masculino','Feminino','Outro'),
+  altura_cliente DECIMAL(6,2),
+  peso_cliente DECIMAL(6,3),
+  observacoes_cliente VARCHAR(150),
+  data_atualizacao_bio TIMESTAMP NULL,
+  FOREIGN KEY (id_cliente_fk) REFERENCES CLIENTE(id_cliente_pk)
+);
+
+-- Tabela CLIENTE_CONTATO
+CREATE TABLE CLIENTE_CONTATO (
+  id_cliente_contato_pk INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id_cliente_fk INT NOT NULL,
+  tipo_contato ENUM('Residencial','Comercial','Outro'),
+  cep_cliente CHAR(9),
+  logradouro_cliente VARCHAR(150),
+  numero_cliente VARCHAR(10),
+  complemento_cliente VARCHAR(50),
+  bairro_cliente VARCHAR(50),
+  cidade_cliente VARCHAR(50),
+  estado_cliente CHAR(2),
+  telefone_fixo_cliente VARCHAR(15),
+  email_secundario_cliente VARCHAR(120),
+  data_cadastro_contato TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  data_atualizacao_contato TIMESTAMP NULL,
+  FOREIGN KEY (id_cliente_fk) REFERENCES CLIENTE(id_cliente_pk)
+);
+
+-- Tabela ORGANIZACAO
+CREATE TABLE ORGANIZACAO (
+  id_organizacao_pk INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  uuid_organizacao CHAR(30) NOT NULL,
+  cnpj_organizacao VARCHAR(20) NOT NULL,
+  nome_fantasia_organizacao VARCHAR(120),
+  razao_social_organizacao VARCHAR(120),
+  natureza_juridica VARCHAR(50),
+  porte VARCHAR(50),
+  situacao_cadastral VARCHAR(50),
+  data_abertura DATE,
+  atividade_principal VARCHAR(120),
+  atividades_secundarias VARCHAR(120),
+  logradouro VARCHAR(150),
+  numero VARCHAR(10),
+  complemento VARCHAR(50),
+  bairro VARCHAR(50),
+  cidade VARCHAR(50),
+  estado CHAR(2),
+  cep VARCHAR(9),
+  telefone VARCHAR(15),
+  email VARCHAR(120),
+  inscricao_estadual VARCHAR(50),
+  codigo_suframa VARCHAR(50),
+  status_organizacao ENUM('Ativa','Inativa','Suspensa','Bloqueada'),
+  nivel_plano_organizacao ENUM('Master','Nivel1','Nivel2','Nivel3'),
+  data_cadastro_organizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  data_atualizacao_organizacao TIMESTAMP NULL
+);
+
+-- Tabela CLIENTE_ORGANIZACAO
+CREATE TABLE CLIENTE_ORGANIZACAO (
+  id_cliente_organizacao_pk INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  uuid_cliente_organizacao CHAR(30) NOT NULL,
+  id_cliente_fk INT NOT NULL,
+  id_organizacao_fk INT NOT NULL,
+  FOREIGN KEY (id_cliente_fk) REFERENCES CLIENTE(id_cliente_pk),
+  FOREIGN KEY (id_organizacao_fk) REFERENCES ORGANIZACAO(id_organizacao_pk)
+);
